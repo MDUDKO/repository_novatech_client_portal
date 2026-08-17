@@ -1,3 +1,5 @@
+# Production deployment requires manual approval by a required reviewer
+
 name: NovaTech CI/CD Pipeline
 
 on:
@@ -12,12 +14,13 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v4
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-            - name: Install linter
+            - name: Install HTMLHint
               run: npm install -g htmlhint
             
-            - name: Run linter
+            - name: Run HTMLHint
               run: htmlhint "*.html"
 
     test:
@@ -26,9 +29,10 @@ jobs:
         needs: [lint]
 
         steps:
-            - uses: actions/checkout@v4
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-            - name: Run validation
+            - name: Run tests
               run: |
                 chmod +x tests/validate.sh
                 ./tests/validate.sh
@@ -39,7 +43,8 @@ jobs:
         needs: [test]
 
         steps:
-            - uses: actions/checkout@v4
+            - name: Checkout code
+              uses: actions/checkout@v4
 
             - name: Create ZIP package
               run: zip -r app-package.zip index.html style.css config.json
@@ -65,7 +70,7 @@ jobs:
 
             - name: Deploy to staging
               run: |
-               echo "deploying to staging..."
+               echo "Deploying to staging..."
                unzip app-package.zip -d ./deploy
                echo "Staging deployment complete"
 
