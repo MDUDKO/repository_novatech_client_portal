@@ -13,7 +13,7 @@ jobs:
 
         steps:
             - name: Checkout code
-            - uses: actions/checkout@v4
+              uses: actions/checkout@v4
 
             - name: Install HTMLHint
               run: npm install -g htmlhint
@@ -28,7 +28,7 @@ jobs:
 
         steps:
             - name: Checkout code
-            - uses: actions/checkout@v4
+              uses: actions/checkout@v4
 
             - name: Run tests
               run: |
@@ -42,7 +42,7 @@ jobs:
 
         steps:
             - name: Checkout code
-            - uses: actions/checkout@v4
+              uses: actions/checkout@v4
 
             - name: Create ZIP package
               run: zip -r app-package.zip index.html style.css config.json
