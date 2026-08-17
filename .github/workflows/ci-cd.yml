@@ -83,7 +83,7 @@ jobs:
                 name: app-package
 
             - name: Deploy to production
-              run:
+              run: |
                 echo "Deploying to production..."
                 unzip app-package.zip -d ./deploy
                 echo "production deployment complete"
