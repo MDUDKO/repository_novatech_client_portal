@@ -12,12 +12,13 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+            - name: Checkout code
             - uses: actions/checkout@v4
 
-            - name: Install linter
+            - name: Install HTMLHint
               run: npm install -g htmlhint
             
-            - name: Run linter
+            - name: Run HTMLHint
               run: htmlhint "*.html"
 
     test:
@@ -26,9 +27,10 @@ jobs:
         needs: [lint]
 
         steps:
+            - name: Checkout code
             - uses: actions/checkout@v4
 
-            - name: Run validation
+            - name: Run tests
               run: |
                 chmod +x tests/validate.sh
                 ./tests/validate.sh
@@ -39,6 +41,7 @@ jobs:
         needs: [test]
 
         steps:
+            - name: Checkout code
             - uses: actions/checkout@v4
 
             - name: Create ZIP package
@@ -65,7 +68,7 @@ jobs:
 
             - name: Deploy to staging
               run: |
-               echo "deploying to staging..."
+               echo "Deploying to staging..."
                unzip app-package.zip -d ./deploy
                echo "Staging deployment complete"
 
