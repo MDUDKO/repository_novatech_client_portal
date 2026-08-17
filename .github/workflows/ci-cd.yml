@@ -1,3 +1,5 @@
+# Production deployment requires manual approval by a required reviewer
+
 name: NovaTech CI/CD Pipeline
 
 on:
